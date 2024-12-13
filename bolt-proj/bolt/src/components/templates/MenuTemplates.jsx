@@ -29,11 +29,16 @@ const categories = ['All', 'Dine-In', 'Café', 'Kids', 'Takeout'];
 const MenuTemplates = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [viewMode, setViewMode] = useState('grid');
+  const [searchQuery, setSearchQuery] = useState(''); // Added search query state
 
-  const filteredTemplates = templates.filter(
-    (template) =>
-      selectedCategory === 'All' || template.category === selectedCategory
-  );
+  // Filter templates based on category and search query
+  const filteredTemplates = templates.filter((template) => {
+    const matchesCategory =
+      selectedCategory === 'All' || template.category === selectedCategory;
+    const matchesSearch =
+      template.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -52,6 +57,8 @@ const MenuTemplates = () => {
               type="text"
               placeholder="Search templates..."
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)} // Update search query
             />
             <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
           </div>

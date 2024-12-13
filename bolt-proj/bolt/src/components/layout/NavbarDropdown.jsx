@@ -6,7 +6,7 @@ const NavbarDropdown = ({ items, isActive }) => {
   if (!items || !isActive) return null;
 
   return (
-    <div className="absolute left-0 mt-2 w-80 bg-white rounded-lg shadow-lg p-4 transition-all duration-200">
+    <div className="absolute left-0 mt-2 w-80 bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 ease-out opacity-0 group-hover:opacity-100">
       {items.map((item) => (
         <Link
           key={item.name}
@@ -16,7 +16,7 @@ const NavbarDropdown = ({ items, isActive }) => {
           <img
             src={item.image}
             alt={item.name}
-            className="w-16 h-16 object-cover rounded"
+            className="w-16 h-16 object-cover rounded transition-opacity duration-300 opacity-0 group-hover:opacity-100"
           />
           <span className="text-gray-700 hover:text-indigo-600">
             {item.name}
